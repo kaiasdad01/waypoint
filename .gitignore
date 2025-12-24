@@ -153,3 +153,4 @@ cython_debug/
 *.sqlite
 
 .cursor/
+.cursor/rules/
