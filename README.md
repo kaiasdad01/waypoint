@@ -1,5 +1,5 @@
 # Status Waypoint
-### Helping to navigate the world of airline status, route optimization, and mileage runs. 
+Helping to navigate the world of airline status, route optimization, and mileage runs. 
 
 
 ## FAQ
@@ -24,9 +24,4 @@ Not yet. Right now this is all CLI based while it's still in proof of concept mo
 
 *Travel time optimization only* | For v0 (aka what you see live now), we don't have price data or additional constraints / filters available yet - we're solely optimizing based on total travel time. This will continue to improve, an v1 will have more filters. Personally - I'm most excited about the aircraft type filter because why wouldn't you want to fly on a B777 for the 90 minute hop from Denver to Las Vegas.
 
-
-<p align="center">
-  <img src="assets/images/kaia-united" width="600"/>
-</p>
-
-
+<img src="./assets/images/kaia-united.jpg" width=50% height=50%/>
