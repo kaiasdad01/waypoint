@@ -152,3 +152,4 @@ cython_debug/
 *.db
 *.sqlite
 
+.cursor/
