@@ -152,5 +152,6 @@ cython_debug/
 *.db
 *.sqlite
 
+# IDE/Editor configurations
 .cursor/
-.cursor/rules/
+.claude/
