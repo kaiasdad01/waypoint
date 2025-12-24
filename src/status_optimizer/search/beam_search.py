@@ -4,6 +4,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 
+from status_optimizer.config import config
 from status_optimizer.constraints import Constraint
 from status_optimizer.domain.itinerary import Itinerary
 from status_optimizer.search.graph import FlightGraph
@@ -22,8 +23,8 @@ class BeamSearch:
         self,
         graph: FlightGraph,
         constraints: List[Constraint],
-        beam_width: int = 200,
-        max_candidates: int = 10000,
+        beam_width: int = config.search.beam_width,
+        max_candidates: int = config.search.max_candidates,
     ):
         self.graph = graph
         self.constraints = constraints

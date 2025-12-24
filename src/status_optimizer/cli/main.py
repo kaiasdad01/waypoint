@@ -7,6 +7,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import List, Optional
 
+from status_optimizer.config import config
 from status_optimizer.constraints import (
     Constraint,
     MaxElapsedConstraint,
@@ -185,22 +186,22 @@ Examples:
     parser.add_argument(
         "--min-layover",
         type=non_negative_int,
-        default=45,
-        help="Minimum layover time in minutes (default: 45)",
+        default=config.cli.min_layover_minutes,
+        help=f"Minimum layover time in minutes (default: {config.cli.min_layover_minutes})",
     )
 
     parser.add_argument(
         "--max-elapsed",
         type=positive_float,
-        default=48.0,
-        help="Maximum total elapsed time in hours (default: 48)",
+        default=config.cli.max_elapsed_hours,
+        help=f"Maximum total elapsed time in hours (default: {config.cli.max_elapsed_hours})",
     )
 
     parser.add_argument(
         "--max-results",
         type=positive_int,
-        default=10,
-        help="Maximum number of results to display (default: 10)",
+        default=config.cli.max_results,
+        help=f"Maximum number of results to display (default: {config.cli.max_results})",
     )
 
     parser.add_argument(
@@ -213,8 +214,8 @@ Examples:
     parser.add_argument(
         "--excel-path",
         type=str,
-        default=None,
-        help="Path to Excel file (defaults to data/united-routes.xlsx)",
+        default=config.cli.excel_path,
+        help=f"Path to Excel file (default: {config.cli.excel_path})",
     )
     
     parser.add_argument(
@@ -270,7 +271,7 @@ def main(args: Optional[List[str]] = None) -> int:
         # For 4+ leg searches, increase default max_elapsed if user didn't specify
         # Multi-leg loops often need more time
         effective_max_elapsed = parsed_args.max_elapsed
-        if parsed_args.legs >= 4 and parsed_args.max_elapsed == 48.0:  # Default value
+        if parsed_args.legs >= 4 and parsed_args.max_elapsed == config.cli.max_elapsed_hours:
             effective_max_elapsed = 72.0  # 3 days for 4+ leg searches
             logger.info(
                 f"Using extended time window for {parsed_args.legs}-leg search: "
@@ -311,7 +312,7 @@ def main(args: Optional[List[str]] = None) -> int:
             constraints=constraints,
             min_layover=timedelta(minutes=parsed_args.min_layover),
             max_elapsed=timedelta(hours=effective_max_elapsed),
-            beam_width=200,  # Default beam width for Phase 0
+            beam_width=config.search.beam_width,
             max_results=parsed_args.max_results,
         )
         
